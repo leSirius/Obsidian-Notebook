@@ -1,4 +1,5 @@
-
+```table-of-contents
+```
 # [RAIL](https://web.dev/articles/rail?hl=zh-cn#response_process_events_in_under_50ms)
 
 ![[Pasted image 20240527012158.png]]用户对性能延迟的感知
