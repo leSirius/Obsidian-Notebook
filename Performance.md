@@ -219,7 +219,7 @@ Blocking the parser can have a huge performance cost—much more than just block
 
 # 优化资源加载
 ## 阻塞渲染
-CSS 是一种阻塞渲染的资源，因为它会阻止浏览器渲染任何内容，直至您构建了 [CSS 对象模型 (CSSOM)](https://developer.mozilla.org/docs/Web/API/CSS_Object_Model)。[](https://web.dev/articles/critical-rendering-path/render-blocking-css?hl=zh-cn)浏览器会阻止呈现，以防止出现[非样式内容闪烁 (FOUC)](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)，这从用户体验的角度来看是不希望发生的。
+CSS 是一种阻塞渲染的资源，因为它会阻止浏览器渲染任何内容，直至您构建了 [CSS 对象模型 (CSSOM)](https://developer.mozilla.org/docs/Web/API/CSS_Object_Model)。[浏览器会阻止渲染](https://web.dev/articles/critical-rendering-path/render-blocking-css?hl=zh-cn)，以防止出现[非样式内容闪烁 (FOUC)](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)，这从用户体验的角度来看是不希望发生的。
 ![[fouc.webm]]
 %%
 阻塞解析器的 `<script>` 还必须等待所有阻塞渲染的 CSS 资源到达并得到解析，然后浏览器才能执行这些资源。这也是设计要求，因为脚本可能会访问阻止呈现的样式表中声明的样式（例如，通过使用 `element.getComputedStyle()`）。
