@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [The article](https://web.dev/articles/howbrowserswork) was way old, written in 2011, when CSS3 and Blink engine were not released. Hopefully, the principles have not changed much. 
 ```table-of-contents
 ```
@@ -8,6 +9,15 @@
 4. 网络：负责http请求等网络调用。
 5. 用户界面后端：用于绘制基本 widget，如组合框和窗口。此后端公开了与平台无关的通用接口。在底层使用操作系统界面方法。
 6. Javascript解释器：解析和执行JS代码。
+=======
+# 高层架构(High-level infrastructure)
+1. 用户界面：包括地址栏、前进/后退按钮、书签菜单等。显示在请求的网页之外。
+2. 浏览器引擎：marshals actions between the UI and the rendering engine.
+3. 渲染引擎：负责显示请求的内容。如果请求的是HTML，会解析HTML和CSS，并把解析的内容显示在屏幕上。
+4. 网络：负责http请求等网络调用。
+5. 用户界面后端：用于绘制基本 widget，如组合框和窗口。此后端公开了与平台无关的通用接口。在底层使用操作系统界面方法。
+6. Javascript解释器：解析和执行JS代码
+>>>>>>> 4905b57dfce6b5cca637ffcf7915eb49dec0f288
 7. 数据存储。这是一个持久层，在内地把偶你各种数据，cookies, localStorage, IndexDB等。
 ![[Pasted image 20240530165806.png]]
 # 渲染引擎主流程
@@ -24,7 +34,10 @@
 解析基于文档所遵循的语法规则（编写文档时所使用的语言或格式）。所有可以解析的格式都必须包含，由**词法**（vocabulary）和**语法规则**组成的**确定性语法**。这被叫做**与上下文无关的语法**（context free grammar)。人类语言不属于这种语言，所以不能被常规的解析方法解析。
 ## 解析器和词法分析器的组合(Parser - Lexer combination)
 （注意token同时被翻译为“标记”或“词元”的混乱，markup尽量翻译为“标签”，hopefully the meaning could make sense）
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4905b57dfce6b5cca637ffcf7915eb49dec0f288
 解析可以分为两个子过程：词法分析和语法分析(lexical analysis and syntax analysis)。
 
 词法分析是将输入内容分解成多个词元(tokens)的过程。词元是语言词汇，即有效组成要素的集合（collection of valid building blocks)。在人类语言中，它由一门语言的字典中出现的所有单词组成。
@@ -32,11 +45,16 @@ Lexical analysis is the process of breaking the input into tokens. Tokens are th
 语法分析是指语法规则的应用。
 
 解析通常会将工作划分到两个组件之间：词法分析器（又称为标记生成器），它负责将输入内容分解为有效标记(valid tokens)，而解析器则负责根据语言语法规则分析文档结构进而构建解析树。
+<<<<<<< HEAD
 
 词法分析器知道如何删除不相关的字符，例如空格和换行符。（在`2+3-1`的例子中，是分解并获取数字2，3，1和操作符+，-的过程。）
 
 解析器通常会向词法分析器要一个新标记(token)，并尝试将该token与某条语法规则匹配。如果规则匹配，则会将token对应的节点加到解析树中，然后解析器会请求另一个token。这个过程是迭代的。
 
+=======
+词法分析器知道如何删除不相关的字符，例如空格和换行符。（在`2+3-1`的例子中，是分解并获取数字2，3，1和操作符+，-的过程。）
+解析器通常会向词法分析器要一个新标记(token)，并尝试将该token与某条语法规则匹配。如果规则匹配，则会将token对应的节点加到解析树中，然后解析器会请求另一个token。这个过程是迭代的。
+>>>>>>> 4905b57dfce6b5cca637ffcf7915eb49dec0f288
 如果没有规则匹配，解析器会在内部存储token，并不断请求令牌，直到发现一条规则匹配所有内部存储的token。如果没有这样的规则，解析器会引发异常，这意味着文档无效，包含语法错误。
 ![[Pasted image 20240530182143.png]]
 
@@ -95,7 +113,11 @@ term := INTEGER | expression
 There are tools that can generate a parser. You feed them the grammar of your language - its vocabulary and syntax rules - and they generate a working parser. Creating a parser requires a deep understanding of parsing and it's not easy to create an optimized parser by hand, so parser generators can be very useful.
 
 WebKit uses two well known parser generators: [Flex](http://en.wikipedia.org/wiki/Flex_lexical_analyser) for creating a lexer and [Bison](http://www.gnu.org/software/bison/) for creating a parser (you might run into them with the names Lex and Yacc). Flex input is a file containing regular expression definitions of the tokens. Bison's input is the language syntax rules in BNF format.
+<<<<<<< HEAD
 # HTML解析
+=======
+# HTML解析器
+>>>>>>> 4905b57dfce6b5cca637ffcf7915eb49dec0f288
 HTML解析器的任务是将HTML标签解析为解析树。
 ## HTML语法
 HTML的词汇和语法由W3C组织创建的规范定义。不过，所有的传统解析器都不适用于HTML（前面掰扯了半天的所谓传统解析器可以用来解析CSS和JS）。
@@ -124,7 +146,11 @@ HTMl无法用解析器所需的上下文无关的的语法(context-free grammar,
 </html>
 ```
 ![[Pasted image 20240530235142.png]]
+<<<<<<< HEAD
 ## 解析算法
+=======
+### 解析算法
+>>>>>>> 4905b57dfce6b5cca637ffcf7915eb49dec0f288
 HTML无法使用常规解析器，因为：
 1. 语言的宽容本质。
 2. 浏览器传统上具有容错能力的事实，来支持无效的HTML
@@ -154,6 +180,10 @@ HTML无法使用常规解析器，因为：
 7. 到达`>`后，`</html>`跟`<html>`一样，会生成`/html`标记，新的标签标记会提交，返回**数据状态**。
 
 ![[Pasted image 20240531004418.png]]
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4905b57dfce6b5cca637ffcf7915eb49dec0f288
 ### 树构建算法
 解析器被创建时，文档对象也会被创建。
 在树构建阶段，以Document为根的DOM树会被修改，并添加元素。每个被标记生成器（tokenizer）提交的节点都将由树构造函数处理。对每个标记，规范都会定义相应的DOM元素，然后DOM元素会被创建。这个元素会被添加到DOM树，以及一个存放开放元素的栈上。栈被用来更正嵌套错误和未关闭的标签。该状态也可以被描述为状态机，这些状态被称为“插入模式”(insertion modes)。
@@ -179,6 +209,7 @@ HTML无法使用常规解析器，因为：
 解析完成后的操作：
 在这个阶段，浏览器会把文档标记为可交互的（interactive），并且开始解析被标记为”deferred“的脚本。
 文档状态随后设置为”完成“（complete），并且一个”（已）读取“（load）事件会触发。
+<<<<<<< HEAD
 ### 浏览器的容错能力
 浏览网页时，基本不会看到“无效语法”的错误，因为浏览器会修复无效内容并继续运行。
 
@@ -659,4 +690,21 @@ Firefox对处理过程进行了优化，它不添加隐藏的元素，比如完�
 ```
 while (!mExiting)    NS_ProcessNextEvent(thread);
 ```
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 4905b57dfce6b5cca637ffcf7915eb49dec0f288
 
