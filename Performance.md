@@ -181,7 +181,8 @@ Server-Timing: auth;dur=55.5, db;dur=220
 - 在内存中绘制元素的像素。
 - 如果有任何像素重叠，则合成像素。
 - 以物理方式将所有生成的像素绘制到屏幕上。
-![[fig-1-v2.svg]]这一呈现过程会发生多次。初始渲染会调用此流程，但随着更多会影响网页渲染的资源可用，浏览器将会重新运行此流程（或许只是其中的一部分），以更新用户看到的内容。关键渲染路径侧重于初始渲染的流程，并依赖于执行初始渲染所需的关键资源。
+![[fig-1-v2.svg]]
+这一呈现过程会发生多次。初始渲染会调用此流程，但随着更多会影响网页渲染的资源可用，浏览器将会重新运行此流程（或许只是其中的一部分），以更新用户看到的内容。关键渲染路径侧重于初始渲染的流程，并依赖于执行初始渲染所需的关键资源。
 
 ## 关键渲染路径上有哪些资源？
 浏览器需要等待一些关键资源下载完毕，然后才能完成初始渲染。这些资源包括：
@@ -200,11 +201,11 @@ Server-Timing: auth;dur=55.5, db;dur=220
 ## 阻塞渲染的资源
 有些资源被认为非常关键，以至于浏览器会暂停网页渲染，直到它处理完毕。CSS 默认属于此类别。
 
-当浏览器看到 CSS（无论是 `<style>` 元素中的内嵌 CSS，还是由 `<link rel=stylesheet href="...">` 元素指定的外部引用的资源）时，浏览器在完成对该 CSS 的下载和处理之前，将避免渲染更多内容。
+当浏览器看到 CSS（无论是 `<style>` 元素中的内嵌 CSS，还是由`<link rel=stylesheet href="...">`元素指定的外部引用的资源）时，浏览器在完成对该 CSS 的下载和处理之前，将避免渲染更多内容。
 %%
-尽管 CSS 默认会阻塞渲染，但也可以通过更改 `<link>` 元素的 `media` 属性来指定与当前条件不匹配的值，将其转换为不阻塞渲染的资源：`<link rel=stylesheet href="..." media=print>`。 [以前会使用此方法](https://www.filamentgroup.com/lab/load-css-simpler/)来允许非关键 CSS 以不阻塞渲染的方式加载。
+尽管 CSS 默认会阻塞渲染，但也可以通过更改 `<link>` 元素的 `media` 属性来指定与当前条件不匹配的值，将其转换为不阻塞渲染的资源：`<link rel=stylesheet href="..." media=print>`。 [以前会使用此方法](https://www.filamentgroup.com/lab/load-css-simpler/)来允许非关键CSS以不阻塞渲染的方式加载。
 %%
-资源阻塞渲染并不一定意味着它会阻止浏览器执行任何其他操作。当浏览器发现需要下载某项 CSS 资源时，它会请求该 CSS 资源并暂停渲染，但仍会继续_处理_其余 HTML 并寻找其他工作。
+资源阻塞渲染并不一定意味着它会阻止浏览器执行任何其他操作。当浏览器发现需要下载某项CSS资源时，它会请求该CSS资源并暂停渲染，但仍会继续_处理_其余HTML并寻找其他工作。
 
 Render-blocking resources, like CSS, used to block all rendering of the page when they were discovered. This means that whether some CSS is render-blocking or not depends on whether the browser has discovered it. Some browsers ([Firefox initially](https://jakearchibald.com/2016/link-in-body/), and now [also Chrome](https://chromestatus.com/feature/5696805480169472)) only block rendering of content below the render-blocking resource. This means that for the critical render-blocking path, we're typically interested in render-blocking resources in the `<head>`, as they effectively block rendering of the entire page.
 
@@ -217,6 +218,28 @@ Parser-blocking resources are effectively render-blocking as well. Since the par
 
 Blocking the parser can have a huge performance cost—much more than just blocking rendering. For this reason, browsers will try to reduce this cost by using a secondary HTML parser known as the [preload scanner](https://web.dev/articles/preload-scanner) to download upcoming resources while the primary HTML parser is blocked. While not as good as actually parsing the HTML, it does at least allow the networking functions in the browser to work ahead of the blocked parser, meaning it will be less likely to be blocked again in the future.
 
+## DCL事件
+DOMContentLoaded事件再没有阻塞式JS的情况下在DOM对象构建完，也就是被标为interactive的时候，立即触发（不等待CSSOM）。如果有同步或者延迟的JS，还得等待CSSOM构建完，然后执行JS再触发。这个事件不会等待异步JS的执行。load事件在所有资源加载，处理完毕时触发。
+[测试](https://web.dev/articles/critical-rendering-path/analyzing-crp?hl=zh-cn)及相关[阅读](https://calendar.perfplanet.com/2012/deciphering-the-critical-rendering-path/
+)
+Next.js 框架里的代码出于待探索原因，CSSOM构建完后触发DCL。
+## 优化关键路径
+为了尽可能快地完成首次渲染，我们需要最大限度地缩短以下三个变量：
+- 关键资源的数量。
+- 关键路径长度。
+- 关键字节数。
+
+关键资源是可能会阻止网页首次渲染的资源。这些资源越少，浏览器的工作量就越小，CPU 和其他资源的使用也就越少。
+
+同样，关键路径长度是关键资源与其字节大小之间依赖关系图的函数：某些资源下载只能在前一个资源处理完毕后才能启动，资源越大，下载所需的往返次数就越多。
+
+最后，浏览器需要下载的关键字节越少，处理内容并将其渲染到屏幕上的速度就越快。为了减少字节数，我们可以减少资源数量（将其删除或设为非关键资源），并通过压缩和优化每个资源来确保最大限度减小传输大小。
+
+**优化关键渲染路径的一般步骤顺序如下**：
+1. 分析关键路径并总结其特征：资源数量、字节数、长度。
+2. 尽可能减少关键资源的数量：删除、延迟下载、标记为异步等。
+3. 优化关键字节数以缩短下载时间（往返次数）。
+4. 优化其余关键资源的加载顺序：尽早下载所有关键资产，以缩短关键路径长度。
 # 优化资源加载
 ## 阻塞渲染
 
@@ -290,7 +313,7 @@ Critical CSS refers to the styles required to render content that is visible wit
 ### 阻塞渲染的JS
 加载不带 `defer` 或 `async` 属性的 `<script>` 元素时，浏览器会阻止解析和渲染，直到脚本下载、解析并执行完毕。同样，内联脚本也会阻止解析器，直到解析和执行脚本。
 
-### ### `async` 与 `defer`
+### `async` 与 `defer`
 这两个声明允许加载外部脚本，而不阻塞HTML解析。scripts (including inline scripts) with `type="module"` are deferred automatically.
 ![[fig-2.svg]]使用saync标签加载的脚本在下载后立即解析和执行，使用defer加载的脚本会在文档解析完成后执行—与浏览器DOMContentLoaded事件同时发生。此外，async不一定按顺序执行，defer则按顺序执行。
 `type="module"` 脚本执行与defer相同，Javascript注入的脚本则像async
