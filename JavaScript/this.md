@@ -1,6 +1,8 @@
+>>**This:** an implicit _context object_ accessible from a code of an execution context — in order to apply the same code for multiple objects. ([source](http://dmitrysoshnikov.com/ecmascript/javascript-the-core-2nd-edition/#this))
+
 this是一个关键字。对除箭头函数外的函数的调用，this的值是调用上下文（invocation context）。（注意“定义”与“调用”的用词）
-（函数或者全局）执行上下文中有一个thisBinding值，箭头函数没有或指这个，然后从outer指向的执行上下文拿
-```
+（函数或者全局）执行上下文中有一个thisBinding值。箭头函数没有自己的this值或许指这个，然后从outer指向的执行上下文拿，所以行为上更像是变量。下文伪代码 [来源](https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0)
+``` 
 FunctionExectionContext = {
   ThisBinding: <Global Object>,
   LexicalEnvironment: {         // let、const 和函数
@@ -130,3 +132,14 @@ function construct() {
 }
 console.log(new construct());
 ```
+ The `new` operator calls the internal \[\[Construct]] method of the `A` function which, in turn, after object creation, calls the internal \[\[Call]] method, all the same function `A`, having provided as `this` value newly created object. ([Source](http://dmitrysoshnikov.com/ecmascript/chapter-3-this/))
+```
+ function A() {
+	console.log(this);    // newly created object, below - "a" object
+	this.x = 10;
+}
+var a = new A();
+
+```
+
+In case some [obstacle things](http://dmitrysoshnikov.com/ecmascript/chapter-3-this/) are needed.

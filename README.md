@@ -1,6 +1,7 @@
 Collection Hub.
 # JavaScript
-- 理解 JavaScript 中的执行上下文和执行栈 （[链接](https://juejin.cn/post/6844903682283143181)) ([link](https://link.juejin.cn/?target=https%3A%2F%2Fblog.bitsrc.io%2Funderstanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0))
+- 理解 JavaScript 中的执行上下文和执行栈 （[链接](https://juejin.cn/post/7129510217863299102)) ([link](https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0))
+- JS：深入理解JavaScript-执行上下文([链接](https://limeii.github.io/2019/05/js-execution-context/))
 # Browser
 - How browsers work ([link](https://web.dev/articles/howbrowserswork))
 - Inside look at modern web browser ([link](https://developer.chrome.com/blog/inside-browser-part1))
