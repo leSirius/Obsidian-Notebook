@@ -2,14 +2,16 @@ Collection Hub.
 # JavaScript
 - 理解 JavaScript 中的执行上下文和执行栈 （[链接](https://juejin.cn/post/7129510217863299102)) ([link](https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0))
 - JS：深入理解JavaScript-执行上下文([链接](https://limeii.github.io/2019/05/js-execution-context/))
+- JavaScript engine fundamentals: Shapes and Inline Caches（[链接](https://hijiangtao.github.io/2018/06/17/Shapes-ICs/)）([Link](https://mathiasbynens.be/notes/shapes-ics))
 # Browser
 - How browsers work ([link](https://web.dev/articles/howbrowserswork))
 - Inside look at modern web browser ([link](https://developer.chrome.com/blog/inside-browser-part1))
 
 # React
-- The how and why on React’s usage of linked list in Fiber to walk the component’s tree ([链接](https://juejin.cn/post/6844903753347252237), [link](https://medium.com/react-in-depth/the-how-and-why-on-reacts-usage-of-linked-list-in-fiber-67f1014d0eb7))
-- Inside Fiber: in-depth overview of the new reconciliation algorithm in React  ([link](https://medium.com/react-in-depth/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react-e1c04700ef6e))
+- The how and why on React’s usage of linked list in Fiber to walk the component’s tree ([链接](https://juejin.cn/post/6844903753347252237), [link](https://angularindepth.com/posts/1007/the-how-and-why-on-reacts-usage-of-linked-list-in-fiber-to-walk-the-components-tree))
+- Inside Fiber: in-depth overview of the new reconciliation algorithm in React  ([link](https://angularindepth.com/posts/1008/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react))
 - In-depth explanation of state and props update in React ([link](https://angularindepth.com/posts/1009/in-depth-explanation-of-state-and-props-update-in-react))
+- 深入 React Fiber（[链接](https://heptaluan.github.io/2020/12/06/React/18/)）
 
 # To Read list
 https://fr.umio.us/favoring-curry/
