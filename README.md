@@ -4,6 +4,10 @@ Collection Hub.
 - JS：深入理解JavaScript-执行上下文([链接](https://limeii.github.io/2019/05/js-execution-context/))
 - JavaScript engine fundamentals: Shapes and Inline Caches（[链接](https://hijiangtao.github.io/2018/06/17/Shapes-ICs/)）([Link](https://mathiasbynens.be/notes/shapes-ics))
 - requestAnimationFrame执行机制探索（[链接](https://hentaicracker.github.io/2020/rAF.html#_3-event-loop-%E4%B8%8E-requestanimationframe)）
+- 深入探討 JavaScript 中的參數傳遞：call by value 還是 reference？（[链接](https://blog.techbridge.cc/2018/06/23/javascript-call-by-value-or-reference/)）
+- 类继承（[链接](https://zh.javascript.info/class-inheritance)）
+- 一文搞懂V8引擎的垃圾回收（[链接](https://juejin.cn/post/6844904016325902344?searchId=20240607212754D93403258B22C5C8D640)）
+- JavaScript 的内存模型（[链接](https://juejin.cn/post/6844904009522757645)）
 # Browser
 - How browsers work ([link](https://web.dev/articles/howbrowserswork))
 - Inside look at modern web browser ([link](https://developer.chrome.com/blog/inside-browser-part1))
