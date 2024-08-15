@@ -8,19 +8,27 @@ Collection Hub.
 - 类继承（[链接](https://zh.javascript.info/class-inheritance)）
 - 一文搞懂V8引擎的垃圾回收（[链接](https://juejin.cn/post/6844904016325902344?searchId=20240607212754D93403258B22C5C8D640)）
 - JavaScript 的内存模型（[链接](https://juejin.cn/post/6844904009522757645)）
+- RollUp （[链接](https://juejin.cn/post/6898865993289105415)）
 # Browser
 - How browsers work ([link](https://web.dev/articles/howbrowserswork))
 - Inside look at modern web browser ([link](https://developer.chrome.com/blog/inside-browser-part1))
 
 # React
+- Build your own React ([link](https://pomb.us/build-your-own-react/))
 - The how and why on React’s usage of linked list in Fiber to walk the component’s tree ([链接](https://juejin.cn/post/6844903753347252237), [link](https://angularindepth.com/posts/1007/the-how-and-why-on-reacts-usage-of-linked-list-in-fiber-to-walk-the-components-tree))
 - Inside Fiber: in-depth overview of the new reconciliation algorithm in React  ([link](https://angularindepth.com/posts/1008/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react))
 - In-depth explanation of state and props update in React ([link](https://angularindepth.com/posts/1009/in-depth-explanation-of-state-and-props-update-in-react))
 - 深入 React Fiber（[链接](https://heptaluan.github.io/2020/12/06/React/18/)）
+# 算法
+- 算法可视化（[链接]( https://visualgo.net/zh)）
 # Blogs
 - J实验室(React, Next.js, 开发 ...)（[链接](https://weijunext.com/)） 
 - Overreacted (By Dan Abramov) ([link](https://overreacted.io))
-- heptaluan‘s blog ([链接](https://heptaluan.github.io))
+- Heptaluan‘s blog ([链接](https://heptaluan.github.io))
+- Front-end-articles（[链接](https://github.com/woai3c/Front-end-articles?tab=readme-ov-file)）
+- 漫谈前端（[链接](https://metaatem.cn)）
+- 前端工程化专栏（[链接](https://juejin.cn/user/932829447855975/posts)）
+- Rodrigo Pombo（[Link](https://pomb.us)）
 # 面试
 - Front-End Journey （[链接](https://fe-journey.cn)）
 - Web-Interview （[链接](https://github.com/febobo/web-interview)）
@@ -45,3 +53,8 @@ Network
 
 函数式
 - https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/
+
+
+react 事件，浏览器事件
+css动画性能
+同源
